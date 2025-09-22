@@ -1,11 +1,10 @@
-import path from "path";
 import express from "express";
-import __dirname from "../utils/config.js";
-
+import { usersArray } from "./users.js";
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.status(201).sendFile(path.resolve(__dirname, "../views/home.html"));
+  console.log(usersArray);
+  res.render("home", { users: usersArray });
 });
 
 export default router;
