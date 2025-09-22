@@ -16,7 +16,7 @@ app.use(usersRoute);
 app.use(homeRoute);
 
 app.use((req, res) => {
-  res.render("404");
+  res.status(404).render("404", { path: "404", pageTitle: "not found" });
 });
 
 app.listen(3000);
