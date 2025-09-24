@@ -9,6 +9,7 @@ router.get("/", (req, res) => {
     path: "/",
     pageTitle: "home page",
     prodsLength: usersArray.length > 0,
+    isHomePageActive:true
   });
 });
 

@@ -5,7 +5,11 @@ const router = express.Router();
 const usersArray = [];
 
 router.get("/createUser", (req, res) => {
-  res.render("createUser", { path: "/createUser", pageTitle: "create users page" });
+  res.render("createUser", {
+    path: "/createUser",
+    pageTitle: "create users page",
+    isCreateUserPageActive: true,
+  });
 });
 
 router.post("/createUser", (req, res) => {
