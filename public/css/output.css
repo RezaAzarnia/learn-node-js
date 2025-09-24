@@ -444,11 +444,6 @@
       outline-style: none;
     }
   }
-  .active\:text-blue-800 {
-    &:active {
-      color: var(--color-blue-800);
-    }
-  }
   .md\:static {
     @media (width >= 48rem) {
       position: static;
@@ -462,11 +457,6 @@
   .md\:w-full {
     @media (width >= 48rem) {
       width: 100%;
-    }
-  }
-  .md\:max-w-1\/1 {
-    @media (width >= 48rem) {
-      max-width: calc(1/1 * 100%);
     }
   }
   .md\:max-w-1\/2 {

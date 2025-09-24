@@ -4,7 +4,12 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
   console.log(usersArray);
-  res.render("home", { users: usersArray , path:"/" , pageTitle : "home page"});
+  res.render("home", {
+    users: usersArray,
+    path: "/",
+    pageTitle: "home page",
+    prodsLength: usersArray.length > 0,
+  });
 });
 
 export default router;

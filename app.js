@@ -3,10 +3,10 @@ import express from "express";
 import homeRoute from "./routes/home.js";
 import usersRoute from "./routes/users.js";
 import __dirname from "./utils/config.js";
-
+import { engine } from "express-handlebars";
 const app = express();
-
-app.set("view engine", "pug");
+app.engine("hbs", engine({ extname: ".hbs", defaultLayout: false }));
+app.set("view engine", "hbs");
 app.set("views", "views");
 
 app.use(express.urlencoded());
