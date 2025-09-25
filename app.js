@@ -9,12 +9,12 @@ app.engine(
   "hbs",
   engine({
     extname: ".hbs",
-    layoutsDir: "./views/layout/",
+    layoutsDir: "./views/hbsViews/layout/",
     defaultLayout: "main-layout.hbs",
   })
 );
 app.set("view engine", "hbs");
-app.set("views", "views");
+app.set("views", "views/hbsViews");
 
 app.use(express.urlencoded());
 app.use(express.static(path.join(__dirname, "../public")));
