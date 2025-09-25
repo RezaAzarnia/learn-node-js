@@ -7,7 +7,7 @@ import __dirname from "./utils/config.js";
 const app = express();
 
 app.set("view engine", "pug");
-app.set("views", "views");
+app.set("views", "views/pugViews");
 
 app.use(express.urlencoded());
 app.use(express.static(path.join(__dirname, "../public")));

@@ -8,7 +8,7 @@ block content
                     p.text-center.text-2xl.text-wrap  -#{user.name}
                     button(class="remove-btn w-full cursor-pointer text-center mt-4 mx-auto" data-id=user.id)  remove user
     else 
-    h1.text-center.text-2xl.mt-8 there is no user
+        h1.text-center.text-2xl.mt-8 there is no user
 
     each user in users.filter(u=>u.id > 2)
         p.text-center.text-2xl  -#{user.name}
