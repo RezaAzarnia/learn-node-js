@@ -3,24 +3,10 @@ import express from "express";
 import homeRoute from "./routes/home.js";
 import usersRoute from "./routes/users.js";
 import __dirname from "./utils/config.js";
-import { engine } from "express-handlebars";
 const app = express();
-<<<<<<< HEAD
 
-app.set("view engine", "pug");
-app.set("views", "views/pugViews");
-=======
-app.engine(
-  "hbs",
-  engine({
-    extname: ".hbs",
-    layoutsDir: "./views/hbsViews/layout/",
-    defaultLayout: "main-layout.hbs",
-  })
-);
-app.set("view engine", "hbs");
-app.set("views", "views/hbsViews");
->>>>>>> test-handleBar
+app.set("view engine", "ejs");
+app.set("views", "views/ejsViews");
 
 app.use(express.urlencoded());
 app.use(express.static(path.join(__dirname, "../public")));
