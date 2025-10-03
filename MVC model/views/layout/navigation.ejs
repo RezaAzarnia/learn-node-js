@@ -1,0 +1,28 @@
+<header>
+  <button
+      class="block cursor-pointer focus:outline-none p-4 md:hidden border-2 border-yellow-500 rounded-md px-4 py-2 m-2 hover:bg-yellow-500 hover:border-white transition-colors"
+      id="toggle-button"
+    >
+      open navbar
+  </button>
+  
+  <ul
+      id="slider-list"
+      class="flex flex-col md:flex-row md:static md:w-full justify-start align-center gap-8 p-4 bg-yellow-500 [&>li]:cursor-pointer w-64 absolute top-0 bottom-0 transition-all -translate-x-64 md:translate-x-0"
+    >
+      <li
+        class="text-xl font-semibold hover:text-blue-800 transition-colors <%= path === '/' ? "text-blue-800" : "" %>"
+      >
+        <a href="/"> home </a>
+      </li>
+      <li
+        class="text-xl font-semibold hover:text-blue-800 transition-colors <%= path === '/createBook' ? "text-blue-800" : "" %> " >
+        <a href="/createBook">createBook</a>
+      </li>
+      <li
+        class="text-xl font-semibold hover:text-blue-800 transition-colors <%= path === '404' ? "text-blue-800" : "" %>"
+      >
+        <a href="/404">not found</a>
+      </li>
+  </ul>
+</header>

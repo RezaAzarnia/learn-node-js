@@ -1,0 +1,31 @@
+<%- include('./layout/head.ejs')%> <%- include('./layout/navigation.ejs')%>
+<main class="w-full max-w-7xl mx-auto mt-12">
+  <% if(products.length > 0){ %>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
+        <% products.forEach(item=>{ %>
+          <div class="flex flex-col justify-between border rounded-2xl shadow bg-white min-h-96">
+              <img class="h-2/3 object-cover w-full rounded-tr-2xl rounded-tl-2xl" src="https://v1.tailwindcss.com/img/card-top.jpg" alt="book-image">
+              <div class="p-4 h-1/2">
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad, delectus dicta. Nostrum optio quisquam doloribus cumque molestias labore in animi earum accusantium illum temporibus minima rem, fuga aspernatur atque corporis.</p>
+                <ul class=" gap-4 justify-center items-center mt-4">
+                  <li class="text-xl font-semibold capitalize ">
+                    bookname : <%=item.bookName %></li>
+                  <li class="text-xl font-semibold capitalize ">
+                    price : <%=item.price.toLocaleString() %></li>
+                  <li class="text-xl font-semibold capitalize ">book count : <%=item.bookCount %></li>
+                </ul>
+                <button>
+                  delete
+                </button>
+              </div>
+          </div>
+        <% }) %>
+      </div>
+  <%} else { %>
+    <div class="space-y-4">
+      <h1 class="text-4xl text-center font-bold">no product exist </h1>
+      <a href="/shop" class="block w-fit mx-auto text-center border-2 border-green-800  mt-5 px-4 py-3 cursor-pointer hover:bg-green-800 hover:border-none hover:text-white capitalize text-xl rounded-lg transition-colors">add new product</a>
+    </div>
+  <% } %>    
+</main>
+<%-include('./layout/end.ejs')%>
