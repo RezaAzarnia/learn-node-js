@@ -5,15 +5,26 @@ let books = [];
 
 const dbPath = path.join(__dirname, "../data/db.json");
 
-const fetchAllBooks = () => {
-  return new Promise((resolve, reject) => {
-    fs.readFile(path.join(dbPath), "utf-8", (err, data) => {
-      if (!err && data) {
-        resolve({ data: JSON.parse(data) });
-      } else {
-        reject({ error: "you have no daata", data: [] });
-      }
-    });
+// const fetchAllBooks = () => {
+//   return new Promise((resolve, reject) => {
+//     fs.readFile(path.join(dbPath), "utf-8", (err, data) => {
+//       if (!err && data) {
+//         resolve({ data: JSON.parse(data) });
+//       } else {
+//         reject({ error: "you have no daata", data: [] });
+//       }
+//     });
+//   });
+// };
+const fetchAllBooks = (callback) => {
+  fs.readFile(path.join(dbPath), "utf-8", (err, data) => {
+    if (!err && data) {
+      console.log(data);
+      const prods = JSON.parse(data);
+      callback(prods);
+    } else {
+      callback([]);
+    }
   });
 };
 
@@ -25,19 +36,20 @@ class Product {
   }
 
   async save() {
-    const { data } = await fetchAllBooks();
-    books = data;
-    books.push({
-      bookName: this.bookName,
-      price: this.price,
-      bookCount: this.count,
-    });
-    fs.writeFile(dbPath, JSON.stringify(books), (err) => {
-      console.log(err);
+    fetchAllBooks((prods) => {
+      books = prods;
+      books.push({
+        bookName: this.bookName,
+        price: this.price,
+        bookCount: this.count,
+      });
+      fs.writeFile(dbPath, JSON.stringify(books), (err) => {
+        console.log(err);
+      });
     });
   }
-  static  fetchBooks() {
-    return fetchAllBooks();
+  static fetchBooks(callback) {
+    fetchAllBooks(callback);
   }
 }
 
