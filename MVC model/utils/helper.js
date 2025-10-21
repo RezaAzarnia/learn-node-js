@@ -12,3 +12,17 @@ exports.validateFields = (body) => {
 
   return Object.keys(errors).length ? errors : null;
 };
+
+exports.validateID = (id) => {
+  if (!id) {
+    return { valid: false, status: 400, message: "id must be exist" };
+  }
+  if (isNaN(id)) {
+    return {
+      valid: false,
+      status: 422,
+      message: "product id must be valid number",
+    };
+  }
+  return { valid: true };
+};

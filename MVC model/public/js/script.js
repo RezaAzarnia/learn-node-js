@@ -1,7 +1,6 @@
 const overlay = document.querySelector("#overlay");
 const modal = document.querySelector("#modal");
 const deleteButton = document.querySelectorAll(".delete-button");
-const deleteForm = null;
 const error = {};
 
 const openModal = () => {
@@ -37,6 +36,78 @@ const handleError = (event, errorMessage) => {
   if (error[name]) nextElementSibling.innerHTML = error[name];
   else nextElementSibling.innerHTML = "";
 };
+const deleteBook = async (event, id) => {
+  event.preventDefault();
+  try {
+    const res = await fetch("http://localhost:3000/delete", {
+      method: "delete",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id }),
+    });
+    const response = await res.json();
+    if (res.ok) {
+      closeModal();
+      window.location.href = "/";
+    } else {
+      throw new Error(
+        response.message || "some error occured please try again later!"
+      );
+    }
+  } catch (e) {
+    console.log(e);
+    if (e instanceof Error) {
+      Toastify({
+        text: e.message,
+        duration: 3000,
+        stopOnFocus: true,
+        position: "center",
+        style: {
+          background: "red",
+          fontSize: "18px",
+        },
+      }).showToast();
+    }
+  }
+};
+const editBook = async (e, id) => {
+  e.preventDefault();
+  const data = {};
+  for (let key of [...new FormData(e.target)]) {
+    data[key[0]] = key[1];
+  }
+  data["id"] = id;
+  // console.log(data);
+  try {
+    const res = await fetch(`http://localhost:3000/edit`, {
+      method: "put",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    const response = await res.json();
+    if (res.ok) {
+      console.log(response);
+      window.location.href = "/";
+    } else {
+      throw new Error(
+        response.message || "some error occured please try again later!"
+      );
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error);
+      Toastify({
+        text: error.message,
+        duration: 3000,
+        stopOnFocus: true,
+        position: "center",
+        style: {
+          background: "red",
+          fontSize: "18px",
+        },
+      }).showToast();
+    }
+  }
+};
 // show with on click like react
 const showModal = (modalType, data) => {
   openModal();
@@ -45,7 +116,7 @@ const showModal = (modalType, data) => {
         <h3 class="text-center font-semibold text-2xl">Are you sure?</h3>
         <span class="text-md text-gray-600 text-center">this action cannot bu undone. All values associated with this field will be lost.</span>
         <div class="flex flex-col items-center justify-center w-full mt-4 gap-2">
-        <form action=/delete/${data.id} method="POST" class="w-full">
+        <form class="w-full" onsubmit="deleteBook(event , ${data.id})">
             <button type="submit" class=" py-2.5 px-8 bg-red-500 rounded-lg text-lg font-medium cursor-pointer text-white hover:bg-red-600 transition-colors duration-200 w-full">delete ${data.name}</button>
         </form>
         <button onclick='closeModal()' type="submit" class="py-2.5 px-8 border border-gray-500 rounded-lg text-lg font-medium cursor-pointer hover:bg-black hover:text-white transition-all duration-200 capitalize w-full">cancel</button>
@@ -58,8 +129,8 @@ const showModal = (modalType, data) => {
     </div>
     <h3 class="text-center font-semibold text-2xl capitalize">edit data</h3>
     <div class="flex flex-col items-center justify-center w-full mt-4 gap-2">
-        <form action=/edit/${data.id} method="POST" class="w-full space-y-4">
-            <div class="">
+        <form class="w-full space-y-4" onsubmit="editBook(event , ${data.id})">
+            <div>
                   <label
                   for="bookName"
                   class="block mb-1 text-md font-semibold capitalize cursor-pointer">
