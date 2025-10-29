@@ -1,0 +1,13 @@
+<%- include("../includes/head.ejs") %>
+<main class="w-full mx-auto mt-12">
+  <h1 class="text-3xl text-center font-bold"><%= product.title %></h1>
+  <img
+    src="<%=product.imgUrl%>"
+    alt="<%=product.title%>"
+    class="w-full mt-4 h-[75vh] object-cover"
+  />
+  <p class="text-xl text-center font-bold">$<%= product.price %></p>
+  <p class="text-xl text-center "><%= product.description%></p>
+  add to cart
+</main>
+<%- include("../includes/end.ejs") %>
