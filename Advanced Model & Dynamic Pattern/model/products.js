@@ -1,6 +1,8 @@
 const fs = require("fs");
 const path = require("path");
+const Cart = require("./cart");
 const dbPath = path.join(__dirname, "../data/products.json");
+
 const fetchAllProducts = (cb) => {
   fs.readFile(dbPath, "utf-8", (err, data) => {
     if (err || !data) {
@@ -30,7 +32,11 @@ class Product {
           console.log("product not found");
           return;
         }
-        products[productIndex] = { ...productInfo };
+        const oldProduct = { ...products[productIndex] };
+        const newProduct = { ...productInfo };
+        
+        products[productIndex] = newProduct;
+        Cart.editCartItem(this.id, oldProduct.price, newProduct.price);
         fs.writeFile(dbPath, JSON.stringify(products), (err, data) => {
           if (err) console.log(err);
         });
@@ -43,13 +49,26 @@ class Product {
       }
     });
   }
+  static deleteById(productId) {
+    fetchAllProducts((data) => {
+      const product = data.find((item) => item.id === productId);
+      const filteredProducts = data.filter((item) => item.id !== productId);
+      // console.log(product);
 
+      fs.writeFile(dbPath, JSON.stringify(filteredProducts), (err, data) => {
+        if (!err) {
+          Cart.deleteFromCart(productId, product.price);
+        }
+      });
+    });
+  }
   static findById(productId, cb) {
     fetchAllProducts((data) => {
       const product = data.find((item) => item.id === productId);
       cb(product);
     });
   }
+
   static getProducts(cb) {
     fetchAllProducts(cb);
   }

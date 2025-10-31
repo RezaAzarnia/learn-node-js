@@ -62,3 +62,8 @@ exports.editProduct = (req, res) => {
   product.save();
   res.redirect("/");
 };
+exports.deleteProduct = (req, res) => {
+  const { productId } = req.params;
+  Product.deleteById(productId)
+  res.redirect("/");
+};

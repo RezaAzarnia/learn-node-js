@@ -8,6 +8,8 @@
   />
   <p class="text-xl text-center font-bold">$<%= product.price %></p>
   <p class="text-xl text-center "><%= product.description%></p>
-  add to cart
+  <div class="mx-auto text-center w-full">
+    <%-include("../includes/addCart.ejs" ,{product})%>                
+  </div>
 </main>
 <%- include("../includes/end.ejs") %>

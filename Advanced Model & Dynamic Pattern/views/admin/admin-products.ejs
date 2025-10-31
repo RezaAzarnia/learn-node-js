@@ -12,7 +12,7 @@
                <div class="flex flex-row-reverse justify-center items-center gap-4 mt-4">
                         <a href="/admin/add-product/<%= item.id %>?edit=true" class=" py-2 px-8  min-w-40 rounded-lg border border-cyan-600 text-black text-lg font-medium w-fit cursor-pointer hover:bg-cyan-600 hover:text-white text-center transition-colors duration-200 capitalize " 
                        >edit</a>
-                    <form action="add-cart" method="post" class="">
+                    <form action="/admin/delete-product/<%=item.id%>" method="post" class="">
                         <button class=" py-2 px-8 min-w-40 rounded-lg border border-cyan-600 text-black text-lg font-medium w-fit cursor-pointer hover:bg-cyan-600 hover:text-white text-center transition-colors duration-200 capitalize " 
                        >delete</button>
                     </form>

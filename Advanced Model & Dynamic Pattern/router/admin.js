@@ -13,4 +13,8 @@ router.post("/admin/createProduct", admin.createProduct);
 
 router.post("/admin/editProduct", admin.editProduct);
 
+router.post("/admin/delete-product/:productId", admin.deleteProduct);
+
+
+
 module.exports = router;
