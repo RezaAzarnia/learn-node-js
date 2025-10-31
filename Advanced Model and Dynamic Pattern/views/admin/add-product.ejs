@@ -1,0 +1,77 @@
+<%- include("../includes/head.ejs") %>
+<main class="w-full max-w-7xl mx-auto mt-12">
+  <h1 class="text-4xl text-center capitalize font-semibold">add book</h1>
+  <form 
+  action="<% if(editMode) { %> /admin/editProduct <% } else { %>/admin/createProduct <% } %>"
+  method="POST" class="mt-4">
+    <div
+      class="flex flex-col w-full max-w-4/5 md:max-w-1/2 border rounded-2xl p-8 mx-auto gap-2"
+    >
+      <div class="space-y-1">
+        <label
+          for="productName"
+          class="text-md block font-semibold capitalize cursor-pointer"
+          >please enter product name :
+        </label>
+        <input
+          type="text"
+          id="productName"
+          name="productName"
+          class="w-full border border-black-500 rounded-md focus:outline-none px-2 py-3 text-lg"
+          value="<% if(editMode) { %><%=product.title %><% } %>"
+        />
+      </div>
+      <div class="space-y-1">
+        <label
+          for="productPrice"
+          class="text-md block font-semibold capitalize cursor-pointer"
+          >please enter product price :
+        </label>
+        <input
+          type="number"
+          id="productPrice"
+          name="productPrice"
+          class="w-full border border-black-500 rounded-md focus:outline-none px-2 py-3 text-lg"
+          value="<% if(editMode) { %><%=product.price %><% } %>"
+        />
+      </div>
+      <div class="space-y-1">
+        <label
+          for="imgUrl"
+          class="text-md block font-semibold capitalize cursor-pointer"
+          >please enter img url :
+        </label>
+        <input
+          type="text"
+          id="imgUrl"
+          name="imgUrl"
+          class="w-full border border-black-500 rounded-md focus:outline-none px-2 py-3 text-lg"
+          value="<% if(editMode) { %><%=product.imgUrl %><% } %>"
+        />
+      </div>
+      <div class="space-y-1">
+        <label
+          for="productDescription"
+          class="text-md block font-semibold capitalize cursor-pointer"
+          >please enter product description :
+        </label>
+        <textarea
+          name="productDescription"
+          id="productDescription"
+          rows="5"
+          class="w-full border border-black-500 rounded-md focus:outline-none px-2 py-1 text-lg"
+        ><% if(editMode) { %><%=product.description %><% } %>
+      </textarea>
+      </div>
+      <button
+        class="border-2 border-green-800 w-full mt-5 px-4 py-3 cursor-pointer hover:bg-green-800 hover:border-none hover:text-white capitalize text-xl rounded-lg transition-colors"
+      >
+      <% if(editMode) { %> edit <% }else { %>submit<% } %>
+      </button>
+    </div>
+    <%if(editMode){ %>  
+         <input name="id" type="hidden" value="<%= product.id %>"/> 
+    <%}%>
+  </form>
+</main>
+<%- include("../includes/end.ejs") %>
