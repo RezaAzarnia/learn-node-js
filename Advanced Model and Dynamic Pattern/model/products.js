@@ -34,11 +34,11 @@ class Product {
         }
         const oldProduct = { ...products[productIndex] };
         const newProduct = { ...productInfo };
-        
+
         products[productIndex] = newProduct;
-        Cart.editCartItem(this.id, oldProduct.price, newProduct.price);
         fs.writeFile(dbPath, JSON.stringify(products), (err, data) => {
-          if (err) console.log(err);
+          if (!err)
+            Cart.editCartItem(this.id, oldProduct.price, newProduct.price);
         });
       } else {
         const newUser = { ...productInfo, id: Date.now().toString() };
